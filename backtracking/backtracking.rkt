@@ -12,6 +12,21 @@
 (define (get-all-placements n)
   empty)
 
-(get-all-placements 4)
+;(get-all-placements 4)
+
+(define (create-board n)
+  (local
+    ((define (create-rows row)
+       (if (> row n)
+           empty
+           (local
+             ((define (create-columns column)
+                (if (> row column)
+                    empty
+                    (cons (make-position-state (make-position row column) 'empty)
+                          (create-columns row (add1 column))))))
+             (create-columns 1))))
+     (create-rows 1))))
+             
 
 
